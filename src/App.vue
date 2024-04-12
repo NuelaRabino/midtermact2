@@ -1,7 +1,7 @@
 <template>
   <div id="app">
+    <AddProductForm @add-product="handleAddProduct" />
     <ProductList :products="products" />
-    <AddProductForm />
   </div>
 </template>
 
@@ -9,8 +9,6 @@
 import { ref } from 'vue';
 import ProductList from './components/ProductList.vue';
 import AddProductForm from './components/AddProductForm.vue';
-// eslint-disable-next-line no-unused-vars
-import store from './store/store.js'; // Import your Vuex store
 
 export default {
   name: 'App',
@@ -26,8 +24,14 @@ export default {
       { id: 3, name: 'Product 3', description: 'Description 3', price: 30 },
     ]);
 
+    const handleAddProduct = (newProduct) => {
+      // Add the new product to the list of products
+      products.value.push(newProduct);
+    };
+
     return {
-      products
+      products,
+      handleAddProduct
     };
   }
 }

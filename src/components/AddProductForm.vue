@@ -1,7 +1,7 @@
 <template>
     <div>
       <h2>Add Product</h2>
-      <form @submit.prevent="addProduct">
+      <form @submit.prevent="submitForm">
         <input type="text" v-model="name" placeholder="Product Name" required>
         <input type="text" v-model="description" placeholder="Description" required>
         <input type="number" v-model.number="price" placeholder="Price" required>
@@ -21,8 +21,21 @@
       };
     },
     methods: {
-      addProduct() {
-        // Implement add product functionality
+      submitForm() {
+        const newProduct = {
+          id: Math.floor(Math.random() * 1000), // Generate a random ID (for demo)
+          name: this.name,
+          description: this.description,
+          price: parseFloat(this.price),
+        };
+  
+        // Emit an event to notify the parent component (App.vue) to add the product
+        this.$emit('add-product', newProduct);
+  
+        // Reset the form fields
+        this.name = '';
+        this.description = '';
+        this.price = 0;
       },
     },
   };
