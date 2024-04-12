@@ -1,7 +1,10 @@
 <template>
   <div id="app">
-    <AddProductForm @add-product="handleAddProduct" />
-    <ProductList :products="products" />
+    <div class="container">
+      <h1 class="title">Product Management</h1>
+      <AddProductForm @add-product="handleAddProduct" />
+      <ProductList :products="products" />
+    </div>
   </div>
 </template>
 
@@ -39,11 +42,20 @@ export default {
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  color: #333;
 }
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.title {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
 </style>
