@@ -46,7 +46,7 @@ export default {
         isEditing: false
       };
 
-      // Emit an event to notify the parent component (App.vue) to add the product
+      // Emit an event to notify the parent component (ProductList) to add the product
       this.$emit('add-product', newProduct);
 
       // Reset the form fields
