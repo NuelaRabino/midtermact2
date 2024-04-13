@@ -7,9 +7,9 @@
       </div>
       <div v-else>
         <form @submit.prevent="saveEditedProduct(product)">
-          <input type="text" v-model="product.name"> <br>
-          <input type="text" v-model="product.description"> <br>
-          <input type="number" v-model.number="product.price"> <br>
+          <input type="text" v-model="product.name" required> <br>
+          <input type="text" v-model="product.description" required> <br>
+          <input type="number" v-model.number="product.price" required min="0"> <br>
           <button type="submit">Save</button>
           <button type="button" @click="cancelEditing(product)">Cancel</button>
         </form>
