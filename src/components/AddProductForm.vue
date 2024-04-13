@@ -4,7 +4,7 @@
       <form @submit.prevent="submitForm">
         <input type="text" v-model="name" placeholder="Product Name" required>
         <input type="text" v-model="description" placeholder="Description" required>
-        <input type="number" v-model.number="price" placeholder="Price" required>
+        <input type="number" v-model.number="price" placeholder="Price" required min="0">
         <button type="submit">Add Product</button>
       </form>
     </div>
@@ -24,7 +24,7 @@
       submitForm() {
 
         // Price Validation
-        if (parseFloat(this.price) < o) {
+        if (parseFloat(this.price) < 0) {
           window.alert("Invalid Input Error: Price cannot be negative.");
           return;
         }
