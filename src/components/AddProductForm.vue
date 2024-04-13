@@ -22,6 +22,13 @@
     },
     methods: {
       submitForm() {
+
+        // Price Validation
+        if (parseFloat(this.price) < o) {
+          window.alert("Invalid Input Error: Price cannot be negative.");
+          return;
+        }
+
         const newProduct = {
           id: Math.floor(Math.random() * 1000), // Generate a random ID (for demo)
           name: this.name,
