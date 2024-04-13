@@ -34,6 +34,7 @@
           name: this.name,
           description: this.description,
           price: parseFloat(this.price),
+          isEditing: false
         };
   
         // Emit an event to notify the parent component (App.vue) to add the product

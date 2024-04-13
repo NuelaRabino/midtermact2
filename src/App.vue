@@ -3,7 +3,7 @@
     <div class="container">
       <h1 class="title">Product Management</h1>
       <AddProductForm @add-product="handleAddProduct" />
-      <ProductList :products="products" />
+      <ProductList :products="products" @handleUpdateProducts="handleUpdateProduct" />
     </div>
   </div>
 </template>
@@ -22,9 +22,9 @@ export default {
   setup() {
     const products = ref([
       // Initial dummy products, you can fetch actual products from Vuex store
-      { id: 1, name: 'Product 1', description: 'Description 1', price: 10 },
-      { id: 2, name: 'Product 2', description: 'Description 2', price: 20 },
-      { id: 3, name: 'Product 3', description: 'Description 3', price: 30 },
+      { id: 1, name: 'Product 1', description: 'Description 1', price: 10, isEditing: false },
+      { id: 2, name: 'Product 2', description: 'Description 2', price: 20, isEditing: false },
+      { id: 3, name: 'Product 3', description: 'Description 3', price: 30, isEditing: false },
     ]);
 
     const handleAddProduct = (newProduct) => {
@@ -32,12 +32,23 @@ export default {
       products.value.push(newProduct);
     };
 
+    const handleUpdateProduct = (updatedProduct) => {
+      // Update the products array with the edited product
+      const index = products.value.findIndex(product => product.id === updatedProduct.id);
+      if (index !== -1) {
+        products.value.splice(index, 1, updatedProduct);
+      }
+      console.log(products.value);
+    };
+
     return {
       products,
-      handleAddProduct
+      handleAddProduct,
+      handleUpdateProduct
     };
   }
 }
+
 </script>
 
 <style>
@@ -57,5 +68,4 @@ export default {
   font-size: 28px;
   margin-bottom: 20px;
 }
-
 </style>
