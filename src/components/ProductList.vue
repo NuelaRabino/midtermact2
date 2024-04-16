@@ -3,7 +3,7 @@
     <h2>Product List</h2>
     <div v-for="(product, index) in products" :key="index" class="product-item">
       <div v-if="!product.isEditing" class="product-details">
-        <ProductItem :product="product" @edit="toggleEditing(product)" @delete="deleteProduct(product)" />
+        <ProductItem :product="product" @edit="toggleEditing(product)" @delete="confirmDeleteProduct(product)" />
       </div>
       <div v-else class="edit-form">
         <form @submit.prevent="saveEditedProduct(product)">
@@ -28,6 +28,7 @@
 
 <script>
 import ProductItem from './ProductItem.vue';
+import Swal from 'sweetalert2';
 
 export default {
   name: 'ProductList',
@@ -43,8 +44,23 @@ export default {
       updatedProduct.isEditing = false;
       this.$emit('handleUpdateProducts', updatedProduct);
     },
+    confirmDeleteProduct(product) {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'You will not be able to recover this product!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, keep it'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.deleteProduct(product);
+        }
+      });
+    },
     deleteProduct(product) {
-      console.log('Deleting product:', product);
+      // Dispatch deleteProduct action with product ID
+      this.$store.dispatch('deleteProduct', product.id);
     },
     cancelEditing(product) {
       product.isEditing = false;
@@ -52,6 +68,7 @@ export default {
   },
 };
 </script>
+
 
 <style scoped>
 .product-list {

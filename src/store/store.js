@@ -37,5 +37,9 @@ export default createStore({
     getProductById: state => id => {
       return state.products.find(product => product.id === id);
     },
+    getVanishedProducts(state) {
+      // Filter out products where isEditing is true
+      return state.products.filter(product => product.isEditing);
+    },
   },
 });
